@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div id="banner-area" class="banner-area" style="background-image:url({% static 'images/banner/banner1.jpg' %})">
+  <div class="banner-text">
+    <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+              <div class="banner-heading">
+                <h1 class="banner-title">Post</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                      <li class="breadcrumb-item"><a href="#">Home</a></li>
+                      <li class="breadcrumb-item"><a href="#">Posts</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Post Details</li>
+                    </ol>
+                </nav>
+              </div>
+          </div><!-- Col end -->
+        </div><!-- Row end -->
+    </div><!-- Container end -->
+  </div><!-- Banner text end -->
+</div><!-- Banner area end -->
+
+<section id="main-container" class="main-container">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-lg-8">
+        <!-- Main Image and Thumbnail Section -->
+        <div class="main-image-container">
+          {% if single_post.images.all %}
+            <!-- Display the first image as the main image -->
+            <img id="mainImage" loading="lazy" class="img-fluid main-image" src="{{ single_post.images.first.image.url }}" alt="{{ single_post.post_name }}">
+          {% else %}
+            <!-- Fallback if no images are available -->
+            <img id="mainImage" loading="lazy" class="img-fluid main-image" src="{% static 'images/default-placeholder.png' %}" alt="No Image Available">
+          {% endif %}
+        </div>
+
+        <div class="thumbnail-container">
+          <!-- Thumbnail Images (loop through all the images related to the post) -->
+          {% for image in single_post.images.all %}
+            <img onmouseover="changeImage(this)" loading="lazy" class="img-fluid thumbnail-image" src="{{ image.image.url }}" alt="{{ single_post.post_name }}">
+          {% endfor %}
+        </div>
+      </div><!-- Slider col end -->
+
+      <div class="col-lg-4 mt-5 mt-lg-0">
+        <h3 class="column-title mrt-0" style="color: blue;">{{ single_post.post_name }}</h3>
+        <p class="description-text">{{ single_post.description }}</p>
+
+        <ul class="project-info list-unstyled">
+          <li>
+            <p class="project-info-label"> <b class style ="color: blue;">Location: </b>{{ single_post.district }}, {{ single_post.city }}, {{ single_post.place }} </p>
+          </li>
+          <li>
+            <p class="project-info-label"><b class style ="color: blue;">Size: </b>{{ single_post.size }}</p>
+          </li>
+          <li>
+            <p class="project-info-label"><b class style ="color: blue;">Price: </b>{{ single_post.price }}</p>
+          </li>
+          <li>
+            <p class="project-info-label"><b class style ="color: blue;">Type: </b>{{ single_post.category }}</p>
+          </li>
+          <li>
+            <p class="project-info-label">
+              <b class style="color: blue;">Available: </b>
+              {% if single_post.is_available %}
+                Yes, Available
+              {% else %}
+                Not Available
+              {% endif %}
+            </p>
+          </li>
+          <li>
+            <p class="project-info-label"><b class style ="color: blue;">Posted On: </b>{{ single_post.created_date }}</p>
+          </li>
+          <li>
+            <p class="project-link">
+              <a class="btn btn-primary" target="_blank" href="#">View Project</a>
+            </p>
+          </li>
+        </ul>
+      </div><!-- Content col end -->
+
+    </div><!-- Row end -->
+
+  </div><!-- Container end -->
+<!-- Main container end -->
+  <div class="container">
+    <!-- Row end
+    <!-- Related posts section -->
+    <section id="related-posts" class="related-posts mt-5">
+      <h3 class="related-title">Related Posts</h3>
+      <div class="row">
+        {% for post in related_posts %}
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="related-post-item">
+              <a href="{% url 'post_detail' post.category.slug post.slug %}">
+                <img class="img-fluid" src="{{ post.images.first.image.url }}" alt="{{ post.post_name }}">
+              </a>
+              <h4><a href="{% url 'post_detail' post.category.slug post.slug %}">{{ post.post_name }}</a></h4>
+              <p>{{ post.description|truncatewords:15 }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </section><!-- Related posts section end -->
+  </div>
+  <!-- Container end -->
+</section><!-- Main container end -->
+
+
+
+<script>
+  // Function to change the main image when a thumbnail is hovered
+  function changeImage(element) {
+    var mainImage = document.getElementById('mainImage');
+    mainImage.src = element.src;  // Change the main image to the hovered thumbnail's source
+  }
+</script>
+
+<style>
+  .main-image-container {
+    margin-bottom: 15px;
+  }
+
+  .main-image {
+    width: 100%;
+    height: auto;
+    max-height: 450px; /* Limit the height */
+    object-fit: cover;
+  }
+
+  .thumbnail-container {
+    display: flex;
+    gap: 15px;
+  }
+
+  .thumbnail-image {
+    width: 23%; /* 4 thumbnails should fit horizontally */
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+  }
+
+  .thumbnail-image:hover {
+    opacity: 1;
+  }
+  .description-text {
+    text-align: justify;    /* Justify the text for better alignment */
+    line-height: 1.6;       /* Increase line height for better readability */
+    padding: 10px 0;        /* Add some space around the text */
+    max-width: 100%;        /* Ensure it doesn't overflow */
+    word-wrap: break-word;  /* Handle long words or links gracefully */
+    font-size: 16px;
+    font-family: Arial;
+}
+#related-posts {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-top: 1px solid #ddd;
+}
+
+.related-title {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.related-post-item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.related-post-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.related-post-item img {
+  width: 100%;
+  height: auto;
+}
+
+.related-post-item h4 {
+  font-size: 1.2rem;
+  margin: 10px;
+}
+
+.related-post-item p {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0 10px 10px 10px;
+}
+
+
+</style>
+
+{% endblock %}

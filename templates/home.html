@@ -1,0 +1,325 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="banner-carousel banner-carousel-1 mb-0">
+  <div class="banner-carousel-item" style="background-image:url({% static 'images/slider-main/bg1.jpg' %})">
+    <div class="slider-content">
+      <div class="container h-100">
+        <div class="row align-items-center h-100">
+          <div class="col-md-12 text-center">
+            <h2 class="slide-title" data-animation-in="slideInLeft">2 Years of excellence in</h2>
+            <h3 class="slide-sub-title" data-animation-in="slideInRight">Real Estate Industry</h3>
+            <p data-animation-in="slideInLeft" data-duration-in="1.2">
+              <a href="{% static 'services.html' %}" class="slider btn btn-primary">Our Services</a>
+              <a href="{% static 'contact.html' %}" class="slider btn btn-primary border">Contact Now</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="banner-carousel-item" style="background-image:url({% static 'images/slider-main/bg2.jpg' %})">
+    <div class="slider-content text-left">
+      <div class="container h-100">
+        <div class="row align-items-center h-100">
+          <div class="col-md-12">
+            <h2 class="slide-title-box" data-animation-in="slideInDown">World Class Service</h2>
+            <h3 class="slide-title" data-animation-in="fadeIn">When Service Matters</h3>
+            <h3 class="slide-sub-title" data-animation-in="slideInLeft">Your Choice is Simple</h3>
+            <p data-animation-in="slideInRight">
+              <a href="{% static 'services.html' %}" class="slider btn btn-primary border">Our Services</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="banner-carousel-item" style="background-image:url({% static 'images/slider-main/bg3.jpg' %})">
+    <div class="slider-content text-right">
+      <div class="container h-100">
+        <div class="row align-items-center h-100">
+          <div class="col-md-12">
+            <h2 class="slide-title" data-animation-in="slideInDown">Meet Our Engineers</h2>
+            <h3 class="slide-sub-title" data-animation-in="fadeIn">We believe sustainability</h3>
+            <p class="slider-description lead" data-animation-in="slideInRight">We will deal with your failure that determines how you achieve success.</p>
+            <div data-animation-in="slideInLeft">
+              <a href="{% static 'contact.html' %}" class="slider btn btn-primary" aria-label="contact-with-us">Get Free Quote</a>
+              <a href="{% static 'about.html' %}" class="slider btn btn-primary border" aria-label="learn-more-about-us">Learn more</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<section class="call-to-action-box no-padding">
+  <div class="container">
+    <div class="action-style-box">
+        <div class="row align-items-center">
+          <div class="col-md-8 text-center text-md-left">
+              <div class="call-to-action-text">
+                <h3 class="action-title">We understand your needs on Real Estate</h3>
+              </div>
+          </div><!-- Col end -->
+          <div class="col-md-4 text-center text-md-right mt-3 mt-md-0">
+              <div class="call-to-action-btn">
+                <a class="btn btn-dark" href="#">Request Quote</a>
+              </div>
+          </div><!-- col end -->
+        </div><!-- row end -->
+
+
+    </div><!-- Action style box -->
+  </div><!-- Container end -->
+</section><!-- Action end -->
+
+<section><!-- Action end -->
+    <section id="news" class="news">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-12">
+                    <h2 class="section-title">Check Below Properties</h2>
+                    <h3 class="section-sub-title">Ease on your Finger Tips</h3>
+                </div>
+            </div>
+            <!--/ Title row end -->
+
+            <div class="row">
+                {% for post in posts %}
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="latest-post">
+                            <div class="latest-post-media">
+                                <a href="{{ post.get_url }}" class="latest-post-img">
+                                    <!-- Display the first image of the post -->
+                                    {% if post.images.first %}
+                                        <img loading="lazy" class="img-fluid" src="{{ post.images.first.image.url }}" alt="{{ post.post_name }}" width="800" height="600">
+                                    {% else %}
+                                        <img loading="lazy" class="img-fluid" src="{% static 'images/default.jpg' %}" alt="No image available" width="800" height="600">
+                                    {% endif %}
+                                </a>
+                            </div>
+                            <div class="post-body">
+                                <div class="latest-post-meta">
+                                    <span class="post-item-date">
+                                        <i class="fa fa-clock-o"></i> {{ post.created_date|date:"F j, Y" }}
+                                    </span>
+                                </div>
+                                <div class="d-flex">
+                <div class="ts-service-box-img">
+                    <img loading="lazy" src="{% static 'images/icon-image/service-icon1.png' %}" alt="service-icon" />
+                </div>
+                <div class="ts-service-info">
+                    <h3 class="service-box-title"><a href="{{ post.get_url }}">{{ post.post_name }}</a></h3>
+                    <p>{{ post.description|truncatewords:24 }}</p>
+                    <a class="learn-more d-inline-block" href="{{ post.get_url }}" aria-label="service-details"><i class="fa fa-caret-right"></i> Learn more</a>
+                </div>
+              </div>
+                            </div>
+                        </div><!-- Latest post end -->
+                    </div><!-- Post col end -->
+                {% empty %}
+                    <div class="col-12">
+                        <p>No posts available.</p>
+                    </div>
+                {% endfor %}
+            </div>
+            <!--/ Content row end -->
+
+            <div class="general-btn text-center mt-4">
+                <a class="btn btn-primary" href="{% url 'listing' %}">See All Listings</a>
+            </div>
+
+        </div>
+        <!--/ Container end -->
+    </section>
+</section>
+
+
+</section>
+
+
+   <section class="main-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="section-header">
+                    <h3 class="section-sub-title">Who We Are</h3>
+                </div>
+                <p class="section-intro">
+                    <h5>Welcome to Dusfourty Real Estate Company Pvt. Ltd.</h5>
+                    Your trusted partner in real estate solutions. Established with a vision to redefine the real estate experience, we are committed to delivering exceptional service and innovative solutions tailored to your needs.
+                </p>
+                <blockquote class="quote">
+                    <p>"Turning your real estate dreams into reality with expertise and dedication."</p>
+                </blockquote>
+                <p class="section-details">
+                    At Dusfourty Real Estate, we specialize in a wide range of real estate services, including property buying and selling, leasing and rental management, and investment consulting. Our team of experienced professionals is dedicated to providing expert guidance and support, ensuring a seamless and stress-free experience for our clients.
+
+                    Our mission is to help you achieve your real estate goals by offering personalized services and leveraging our in-depth market knowledge. Whether you are looking to buy your dream home, find the perfect rental property, or invest in lucrative real estate opportunities, we are here to assist you every step of the way.
+
+                    With a reputation for integrity and excellence, Dusfourty Real Estate Company Pvt. Ltd. is committed to building lasting relationships and making your real estate journey a success. Discover the difference with Dusfourty – where your real estate aspirations become reality.
+                </p>
+            </div><!-- Col end -->
+        </div><!-- Row end -->
+    </div><!-- Container end -->
+</section>
+
+<section id="ts-service-area" class="ts-service-area pb-0">
+  <div class="container">
+    <div class="row text-center">
+        <div class="col-12">
+          <h2 class="section-title">We Are Specialists In</h2>
+          <h3 class="section-sub-title">What We Do</h3>
+        </div>
+    </div>
+    <!--/ Title row end -->
+
+  {% load static %}
+<div class="row">
+    <div class="col-lg-4">
+        <div class="ts-service-box d-flex">
+            <div class="ts-service-box-img">
+                <img loading="lazy" src="{% static 'images/icon-image/service-icon1.png' %}" alt="service-icon">
+            </div>
+            <div class="ts-service-box-info">
+                <h3 class="service-box-title"><a href="#">Property Buying and Selling</a></h3>
+                <p>Assisting clients in buying or selling residential or commercial properties, including market analysis, pricing strategies, and transaction management.</p>
+            </div>
+        </div><!-- Service 1 end -->
+
+        <div class="ts-service-box d-flex">
+            <div class="ts-service-box-img">
+                <img loading="lazy" src="{% static 'images/icon-image/service-icon2.png' %}" alt="service-icon">
+            </div>
+            <div class="ts-service-box-info">
+                <h3 class="service-box-title"><a href="#">Property Leasing and Rental Management</a></h3>
+                <p> Helping property owners lease their properties and manage rental agreements, including tenant screening, lease negotiation, and property maintenance.</p>
+            </div>
+        </div><!-- Service 2 end -->
+
+        <div class="ts-service-box d-flex">
+            <div class="ts-service-box-img">
+                <img loading="lazy" src="{% static 'images/icon-image/service-icon3.png' %}" alt="service-icon">
+            </div>
+            <div class="ts-service-box-info">
+                <h3 class="service-box-title"><a href="#">Real Estate Investment Consulting</a></h3>
+                <p> Offering guidance on investment opportunities, including property value assessments, market trends, and investment strategies to maximize returns.</p>
+            </div>
+        </div><!-- Service 3 end -->
+    </div><!-- Col end -->
+
+    <div class="col-lg-4 text-center">
+        <img loading="lazy" class="img-fluid" src="{% static 'images/services/service-center.jpg' %}" alt="service-avater-image">
+    </div><!-- Col end -->
+
+    <div class="col-lg-4 mt-5 mt-lg-0 mb-4 mb-lg-0">
+        <div class="ts-service-box d-flex">
+            <div class="ts-service-box-img">
+                <img loading="lazy" src="{% static 'images/icon-image/service-icon4.png' %}" alt="service-icon">
+            </div>
+            <div class="ts-service-box-info">
+                <h3 class="service-box-title"><a href="#">Property Valuation and Appraisal</a></h3>
+                <p>Providing accurate property valuations and appraisals for buying, selling, or financing purposes, based on market data and property conditions.</p>
+            </div>
+        </div><!-- Service 4 end -->
+
+        <div class="ts-service-box d-flex">
+            <div class="ts-service-box-img">
+                <img loading="lazy" src="{% static 'images/icon-image/service-icon5.png' %}" alt="service-icon">
+            </div>
+            <div class="ts-service-box-info">
+                <h3 class="service-box-title"><a href="#">Property Management</a></h3>
+                <p>Managing day-to-day operations of rental properties, including maintenance, repairs, and tenant relations, ensuring properties are well-maintained and profitable.</p>
+            </div>
+        </div><!-- Service 5 end -->
+
+        <div class="ts-service-box d-flex">
+            <div class="ts-service-box-img">
+                <img loading="lazy" src="{% static 'images/icon-image/service-icon6.png' %}" alt="service-icon">
+            </div>
+            <div class="ts-service-box-info">
+                <h3 class="service-box-title"><a href="#">Real Estate Development</a></h3>
+                <p> Assisting with the development of new real estate projects, including land acquisition, project planning, construction management, and marketing of newly developed properties.</p>
+            </div>
+        </div><!-- Service 6 end -->
+    </div><!-- Col end -->
+</div><!-- Row end -->
+          </div><!-- Service 6 end -->
+        </div><!-- Col end -->
+    </div><!-- Content row end -->
+
+  </div>
+  <!--/ Container end -->
+  <section class="subscribe no-padding">
+  <div class="container">
+    <div class="row">
+        <div class="col-lg-4">
+          <div class="subscribe-call-to-acton">
+              <h3>Can We Help?</h3>
+              <h4>(+977) 9801406216</h4>
+          </div>
+        </div><!-- Col end -->
+
+        <div class="col-lg-8">
+          <div class="ts-newsletter row align-items-center">
+              <div class="col-md-5 newsletter-introtext">
+                <h4 class="text-white mb-0">Newsletter Sign-up</h4>
+                <p class="text-white">Latest updates and news</p>
+              </div>
+
+              <div class="col-md-7 newsletter-form">
+                <form action="#" method="post">
+                    <div class="form-group">
+                      <label for="newsletter-email" class="content-hidden">Newsletter Email</label>
+                      <input type="email" name="email" id="newsletter-email" class="form-control form-control-lg" placeholder="Your your email and hit enter" autocomplete="off">
+                    </div>
+                </form>
+              </div>
+          </div><!-- Newsletter end -->
+        </div><!-- Col end -->
+
+    </div><!-- Content row end -->
+  </div>
+  <!--/ Container end -->
+</section><!-- Service end -->
+
+
+
+
+
+  <!-- Javascript Files
+  ================================================== -->
+
+  <!-- initialize jQuery Library -->
+  <script src="plugins/jQuery/jquery.min.js"></script>
+  <!-- Bootstrap jQuery -->
+  <script src="plugins/bootstrap/bootstrap.min.js" defer></script>
+  <!-- Slick Carousel -->
+  <script src="plugins/slick/slick.min.js"></script>
+  <script src="plugins/slick/slick-animation.min.js"></script>
+  <!-- Color box -->
+  <script src="plugins/colorbox/jquery.colorbox.js"></script>
+  <!-- shuffle -->
+  <script src="plugins/shuffle/shuffle.min.js" defer></script>
+
+
+  <!-- Google Map API Key-->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU" defer></script>
+  <!-- Google Map Plugin-->
+  <script src="plugins/google-map/map.js" defer></script>
+
+  <!-- Template custom -->
+  <script src="js/script.js"></script>
+
+  </div><!-- Body inner end -->
+  </body>
+
+  </html>
+
+{% endblock %}

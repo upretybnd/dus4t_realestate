@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!--/ Header end -->
+<div id="banner-area" class="banner-area" style="background-image:url({% static 'images/banner/banner1.jpg' %})">
+  <div class="banner-text">
+    <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+              <div class="banner-heading">
+                <h1 class="banner-title">About</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                      <li class="breadcrumb-item"><a href="#">Company</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">About Us</li>
+                    </ol>
+                </nav>
+              </div>
+          </div><!-- Col end -->
+        </div><!-- Row end -->
+    </div><!-- Container end -->
+  </div><!-- Banner text end -->
+</div><!-- Banner area end -->
+
+<section id="main-container" class="main-container">
+  <div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+          <p class="section-intro">
+                    <h5>Welcome to Dusfourty Real Estate Company Pvt. Ltd.</h5>
+                    Your trusted partner in real estate solutions. Established with a vision to redefine the real estate experience, we are committed to delivering exceptional service and innovative solutions tailored to your needs.
+                </p>
+                <blockquote class="quote">
+                    <p>"Turning your real estate dreams into reality with expertise and dedication."</p>
+                </blockquote>
+                <p class="section-details">
+                    At Dusfourty Real Estate, we specialize in a wide range of real estate services, including property buying and selling, leasing and rental management, and investment consulting. Our team of experienced professionals is dedicated to providing expert guidance and support, ensuring a seamless and stress-free experience for our clients.
+
+                    Our mission is to help you achieve your real estate goals by offering personalized services and leveraging our in-depth market knowledge. Whether you are looking to buy your dream home, find the perfect rental property, or invest in lucrative real estate opportunities, we are here to assist you every step of the way.
+
+                    With a reputation for integrity and excellence, Dusfourty Real Estate Company Pvt. Ltd. is committed to building lasting relationships and making your real estate journey a success. Discover the difference with Dusfourty – where your real estate aspirations become reality.
+          </p>
+        </div><!-- Col end -->
+
+        <div class="col-lg-6 mt-5 mt-lg-0">
+
+              <div class="item">
+                <div class="ts-team-wrapper">
+                    <div class="team-img-wrapper">
+                      <img loading="lazy" class="w-100" src="{% static 'images/sandip.jpg' %}" alt="team-img">
+                    </div>
+                    <div class="ts-team-content">
+                      <h3 class="ts-name">Deepu Chapagain (Sandeep)</h3>
+                      <p class="ts-designation">Proprietor</p>
+                      <div class="team-social-icons">
+                          <a target="_blank" href="#"><i class="fab fa-facebook-f"></i></a>
+                          <a target="_blank" href="#"><i class="fab fa-twitter"></i></a>
+                          <a target="_blank" href="#"><i class="fab fa-google-plus"></i></a>
+                          <a target="_blank" href="#"><i class="fab fa-linkedin"></i></a>
+                      </div><!--/ social-icons-->
+                    </div>
+                </div><!--/ Team wrapper end -->
+              </div><!-- Team 1 end -->
+            </div>
+</section><!--/ Team end -->
+{% endblock %}
