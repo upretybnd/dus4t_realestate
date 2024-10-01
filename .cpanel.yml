@@ -1,0 +1,17 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/yourusername/path/to/your/project
+    - export VIRTUALENV=$DEPLOYPATH/venv
+    - echo "Creating virtual environment"
+    - python3 -m venv $VIRTUALENV
+    - echo "Activating virtual environment"
+    - source $VIRTUALENV/bin/activate
+    - echo "Installing dependencies"
+    - pip install -r requirements.txt
+    - echo "Applying migrations"
+    - python manage.py migrate
+    - echo "Collecting static files"
+    - python manage.py collectstatic --noinput
+    - echo "Restarting application"
+    - touch /home/dusfourt/public_html
