@@ -1,6 +1,6 @@
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/dusfourt/public_html
+    - export DEPLOYPATH=/home/dusfourt/public_html/
     - export VIRTUALENV=$DEPLOYPATH/venv
     - echo "Creating virtual environment"
     - python3 -m venv $VIRTUALENV
@@ -13,4 +13,4 @@ deployment:
     - echo "Collecting static files"
     - python manage.py collectstatic --noinput
     - echo "Restarting application"
-    - touch /home/dusfourt/public_html
+    - touch /home/dusfourt/public_html/
