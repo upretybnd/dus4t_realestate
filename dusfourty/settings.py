@@ -26,7 +26,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = ['http:/dusfourty.com.np']
+ALLOWED_HOSTS = ['https://dusfourty.com.np']
 
 # Application definition
 
@@ -80,10 +80,14 @@ AUTH_USER_MODEL = 'accounts.Account'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+  'default': {
+  'ENGINE': 'django.db.backends.mysql',
+  'NAME': 'dusfourt_listing',
+  'USER': 'dusfourt_user',
+  'PASSWORD': '=n53]wUsW!oy'
+  'HOST': 'localhost',
+  'PORT': '5432',
+  }
 }
 
 # Password validation
